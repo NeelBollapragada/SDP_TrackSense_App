@@ -9,7 +9,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.jsx to edit this screen.</Text>
+      <Text className="text-blue-500">Edit app/index.jsx to edit this screen. Hello</Text>
     </View>
   );
 }
