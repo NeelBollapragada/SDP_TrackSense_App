@@ -1,12 +1,47 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
-  function handleStart() {
-    console.log("START pressed");
+
+  const LAPTOP_IP = '10.124.221.193'; 
+
+  async function handleStart() {
+    console.log("Sending START...");
+    try {
+      // Send the POST request to your Laptop's Flask server
+      const response = await fetch(`http://${LAPTOP_IP}:5000/command`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'START' }),
+      });
+
+      if (response.ok) {
+        console.log("✅ Successfully sent START");
+      } else {
+        Alert.alert("Error", "Laptop received the request but something went wrong.");
+      }
+    } catch (error) {
+      // This triggers if your laptop is offline, on a different Wi-Fi, or the IP is wrong
+      console.error(error);
+      Alert.alert("Connection Failed", "Could not reach the laptop at " + LAPTOP_IP);
+    }
   }
 
-  function handleStop() {
-    console.log("STOP pressed");
+  async function handleStop() {
+    console.log("Sending STOP...");
+    try {
+      const response = await fetch(`http://${LAPTOP_IP}:5000/command`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'STOP' }),
+      });
+
+      if (response.ok) {
+        console.log("✅ Successfully sent STOP");
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Connection Failed", "Could not reach the laptop.");
+    }
   }
 
   return (
