@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 export default function App() {
 
   // Hardcoded IP - will probably need to change
-  const LAPTOP_IP = '10.124.221.193'; 
+  const LAPTOP_IP = '192.168.6.1'; 
 
   async function handleStart() {
     console.log("Sending START...");
