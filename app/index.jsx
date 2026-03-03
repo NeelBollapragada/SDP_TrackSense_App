@@ -65,6 +65,9 @@ export default function App() {
           className="flex-row items-center bg-emerald-500 px-6 py-4 rounded-xl"
           onPress={handleStart}
           activeOpacity={0.7}
+          accessibilityLabel="Start"
+          accessibilityRole="button"
+          accessibilityHint="Begins tracking"
         >
           <Text className="text-white text-xl mr-2">▶</Text>
           <Text className="text-white text-xl font-bold">START</Text>
@@ -74,6 +77,9 @@ export default function App() {
           className="flex-row items-center bg-red-500 px-6 py-4 rounded-xl"
           onPress={handleStop}
           activeOpacity={0.7}
+          accessibilityLabel="Stop"
+          accessibilityRole="button"
+          accessibilityHint="Stops tracking"
         >
           <Text className="text-white text-xl mr-2">⏹</Text>
           <Text className="text-white text-xl font-bold">STOP</Text>
