@@ -1,9 +1,12 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
 
   // Hardcoded IP - will probably need to change
-  const LAPTOP_IP = '192.168.6.1'; 
+  const LAPTOP_IP = '192.168.8.1'; 
+
+  const [isStarted, setIsStarted] = useState(false);
 
   async function handleStart() {
     console.log("Sending START...");
@@ -17,6 +20,7 @@ export default function App() {
 
       if (response.ok) {
         console.log("✅ Successfully sent START");
+        setIsStarted(true);
       } else {
         Alert.alert("Error", "Laptop received the request but something went wrong.");
       }
@@ -38,6 +42,7 @@ export default function App() {
 
       if (response.ok) {
         console.log("✅ Successfully sent STOP");
+        setIsStarted(false);
       }
     } catch (error) {
       console.error(error);
@@ -55,6 +60,7 @@ export default function App() {
 
       <View className="flex-col gap-6">
         
+        {!isStarted ? 
         <TouchableOpacity 
           className="flex-row items-center bg-emerald-500 px-6 py-4 rounded-xl"
           onPress={handleStart}
@@ -63,7 +69,7 @@ export default function App() {
           <Text className="text-white text-xl mr-2">▶</Text>
           <Text className="text-white text-xl font-bold">START</Text>
         </TouchableOpacity>
-
+        :
         <TouchableOpacity 
           className="flex-row items-center bg-red-500 px-6 py-4 rounded-xl"
           onPress={handleStop}
@@ -72,7 +78,7 @@ export default function App() {
           <Text className="text-white text-xl mr-2">⏹</Text>
           <Text className="text-white text-xl font-bold">STOP</Text>
         </TouchableOpacity>
-
+        }
       </View>
     </View>
   );
